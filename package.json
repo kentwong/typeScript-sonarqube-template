@@ -20,7 +20,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test:coverage": "react-scripts test --coverage --watchAll=false",
+    "test:ci": "react-scripts test --coverage --silent --watchAll=false --reporters=default",
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "lint:ci": "npm run lint -- -f json -o eslint-report.json",
+    "report": "npm run test:ci && npm run lint:ci",
+    "sonar": "npm run report && node sonarqube-scanner.js"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "sonarqube-scanner": "^2.8.1"
   }
 }
